@@ -8,6 +8,7 @@ public class WarehouseServersideApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WarehouseServersideApplication.class, args);
+                System.out.println("serverside is runing");
 	}
 
 }

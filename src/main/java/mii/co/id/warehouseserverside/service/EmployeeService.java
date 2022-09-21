@@ -1,0 +1,51 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package mii.co.id.warehouseserverside.service;
+
+import java.util.List;
+import lombok.AllArgsConstructor;
+import mii.co.id.warehouseserverside.model.Employee;
+import mii.co.id.warehouseserverside.repository.EmployeeRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+/**
+ *
+ * @author USER
+ */
+@AllArgsConstructor
+@Service
+public class EmployeeService {
+    private final EmployeeRepository employeeRepository;
+    
+   public  List<Employee> getAll(){
+       return employeeRepository.findAll();
+   }
+   
+   public  Employee getById(Long id){
+       return employeeRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Employee Not Found"));
+   }
+   
+   public Employee create(Employee employee){
+       if (employee.getId() != null) {
+           throw new ResponseStatusException(HttpStatus.CONFLICT, "Data Employee Has Ready Exist!!");
+       }
+       return employeeRepository.save(employee);
+   }
+   
+   public Employee update(Long id, Employee employee){
+       getById(id);
+       employee.setId(id);
+       return employeeRepository.save(employee);
+   }
+   
+   public Employee delete(Long id){
+       Employee employee = getById(id);
+       employeeRepository.delete(employee);
+       return employee;
+   }
+    
+}

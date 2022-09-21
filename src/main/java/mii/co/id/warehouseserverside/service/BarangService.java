@@ -31,4 +31,24 @@ public class BarangService {
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Barang Not Found"));
     }
     
+    public Barang create(Barang barang) {
+        if (barang.getId() != null ) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Data Barang has Already Exist!");
+        }
+        return barangRepository.save(barang);
+    }
+    
+    public Barang update(Long id, Barang barang) {
+        getById(id);
+        barang.setId(id);
+        return barangRepository.save(barang);
+    }
+    
+    public Barang delete(Long id) {
+        Barang barang = getById(id);
+        barangRepository.delete(barang);
+        return barang;
+    }
+    
+    
 }

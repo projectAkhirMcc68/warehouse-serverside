@@ -46,13 +46,9 @@ public class Barang {
     @Column(nullable = false)
     private Integer harga;
     
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Date tanggal;
     
-    @OneToMany(mappedBy = "barang")
-//    @JoinTable(
-//            name = "pengajuan_barang",
-//            joinColumns = @JoinColumn(name = "barang_id"),
-//            inverseJoinColumns = @JoinColumn(name = "pengajuan_id"))
-    private Pengajuan pengajuan;
+//    @OneToMany(mappedBy = "barang")   
+//    private Pengajuan pengajuan;
 }

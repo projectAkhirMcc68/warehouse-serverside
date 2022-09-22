@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mii.co.id.warehouseserverside.model.dao.response;
+package mii.co.id.warehouseserverside.model.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +16,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HistoryResponse {
+public class EmployeeRequest {
     
-    private Long id;
-    private Long pengajuanId;
-    private Long statusId;
-    private String nameStatus;
-    private Date date;
-    private String notes;
+    private String fullName;
+    private String email;
+    private Date dateOfBirth;
+    private String jenisKelamin;
+    private String username;
+    private String password;
     
 }

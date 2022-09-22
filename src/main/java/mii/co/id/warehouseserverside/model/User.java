@@ -4,6 +4,7 @@
  */
 package mii.co.id.warehouseserverside.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,18 +30,19 @@ import lombok.NoArgsConstructor;
 public class User {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(unique = true)
     private String username;
     
-    @Column(nullable = false)
+    @Column()
     private String password;
     
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id",referencedColumnName = "id")
     private Employee employee;
     
 }

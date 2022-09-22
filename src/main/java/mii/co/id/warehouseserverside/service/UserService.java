@@ -31,9 +31,9 @@ public class UserService {
    }
    
    public User create(User user){
-       if (user.getId() != null) {
-           throw new ResponseStatusException(HttpStatus.CONFLICT, "Data User Has Ready Exist!!");
-       }
+//       if (user.getId() != null) {
+//           throw new ResponseStatusException(HttpStatus.CONFLICT, "Data User Has Ready Exist!!");
+//       }
        return userRepository.save(user);
    }
    

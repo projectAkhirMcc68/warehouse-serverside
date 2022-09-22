@@ -7,6 +7,7 @@ package mii.co.id.warehouseserverside.controller;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Employee;
+import mii.co.id.warehouseserverside.model.dto.request.EmployeeRequest;
 import mii.co.id.warehouseserverside.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,11 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<Employee> create(@RequestBody Employee employee){
         return new ResponseEntity(employeeService.create(employee),HttpStatus.CREATED);
+    }
+    
+      @PostMapping("/dto")
+    public ResponseEntity<Employee> createDto(@RequestBody EmployeeRequest employeeRequest){
+        return new ResponseEntity(employeeService.createDto(employeeRequest),HttpStatus.CREATED);
     }
     
     @PutMapping("/{id}")

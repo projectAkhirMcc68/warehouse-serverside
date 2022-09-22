@@ -6,10 +6,10 @@ package mii.co.id.warehouseserverside.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.websocket.server.PathParam;
+
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.History;
-import mii.co.id.warehouseserverside.model.dao.response.HistoryResponse;
+import mii.co.id.warehouseserverside.model.dto.response.HistoryResponse;
 import mii.co.id.warehouseserverside.service.HistoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

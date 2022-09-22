@@ -5,6 +5,7 @@
 package mii.co.id.warehouseserverside.model;
 
 import java.sql.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Employee {
     @Column(name = "jenis_kelamin")
     private String jenisKelamin;
     
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private User user;
     

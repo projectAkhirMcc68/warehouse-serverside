@@ -7,7 +7,10 @@ package mii.co.id.warehouseserverside.service;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Employee;
+import mii.co.id.warehouseserverside.model.User;
+import mii.co.id.warehouseserverside.model.dto.request.EmployeeRequest;
 import mii.co.id.warehouseserverside.repository.EmployeeRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final ModelMapper modelMapper;
     
    public  List<Employee> getAll(){
        return employeeRepository.findAll();
@@ -33,6 +37,25 @@ public class EmployeeService {
        if (employee.getId() != null) {
            throw new ResponseStatusException(HttpStatus.CONFLICT, "Data Employee Has Ready Exist!!");
        }
+       return employeeRepository.save(employee);
+   }
+   
+   public Employee createDto(EmployeeRequest employeeRequest){
+       Employee employee = modelMapper.map(employeeRequest, Employee.class);
+       User user = modelMapper.map(employeeRequest, User.class);
+//       Employee employee = new Employee();
+//       employee.setFullName(employee.getFullName());
+//       employee.setEmail(employee.getEmail());
+//       employee.setDateOfBirth(employee.getDateOfBirth());
+//       employee.setJenisKelamin(employee.getJenisKelamin());
+//       
+//       User user = new User();
+//       user.setUsername(user.getUsername());
+//       user.setPassword(user.getPassword());
+//       
+       user.setEmployee(employee);
+       employee.setUser(user);
+       
        return employeeRepository.save(employee);
    }
    

@@ -4,12 +4,15 @@
  */
 package mii.co.id.warehouseserverside.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Employee;
+import mii.co.id.warehouseserverside.model.Role;
 import mii.co.id.warehouseserverside.model.User;
 import mii.co.id.warehouseserverside.model.dto.request.EmployeeRequest;
 import mii.co.id.warehouseserverside.repository.EmployeeRepository;
+import mii.co.id.warehouseserverside.repository.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
+    private final RoleRepository roleRepository;
     
    public  List<Employee> getAll(){
        return employeeRepository.findAll();
@@ -43,6 +47,10 @@ public class EmployeeService {
    public Employee createDto(EmployeeRequest employeeRequest){
        Employee employee = modelMapper.map(employeeRequest, Employee.class);
        User user = modelMapper.map(employeeRequest, User.class);
+       
+        List<Role> role = new ArrayList<>();
+        role.add(roleRepository.findById(employeeRequest.getRoleId()).get());
+        user.setRoles(role);
 //       Employee employee = new Employee();
 //       employee.setFullName(employee.getFullName());
 //       employee.setEmail(employee.getEmail());

@@ -7,7 +7,9 @@ package mii.co.id.warehouseserverside.service;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Pengajuan;
+import mii.co.id.warehouseserverside.model.dto.request.PengajuanRequest;
 import mii.co.id.warehouseserverside.repository.PengajuanRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class PengajuanService {
     
     private final PengajuanRepository pengajuanRepository;
+    private final ModelMapper modelMapper;
     
    public  List<Pengajuan> getAll(){
        return pengajuanRepository.findAll();
@@ -36,6 +39,15 @@ public class PengajuanService {
        }
        return pengajuanRepository.save(pengajuan);
    }
+   
+//   public Pengajuan create(PengajuanRequest pengajuanRequest){
+////       if (pengajuanRequest.getId() != null) {
+////           throw new ResponseStatusException(HttpStatus.CONFLICT, "Data Pengajuan Has Ready Exist!!");
+////       }
+//        Pengajuan pengajuan = modelMapper.map(pengajuanRequest, Pengajuan.class);
+//       
+//       return pengajuanRepository.save(pengajuan);
+//   }
    
    public Pengajuan update(Long id, Pengajuan pengajuan){
        getById(id);

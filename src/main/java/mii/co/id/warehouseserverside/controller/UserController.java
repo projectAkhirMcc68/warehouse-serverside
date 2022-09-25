@@ -7,6 +7,7 @@ package mii.co.id.warehouseserverside.controller;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.User;
+import mii.co.id.warehouseserverside.model.dto.request.AddRoleRequest;
 import mii.co.id.warehouseserverside.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> create(@RequestBody User user){
         return new ResponseEntity(userService.create(user),HttpStatus.CREATED);
+    }
+    
+    @PostMapping("/{id}")
+    public ResponseEntity<User> addRole(@PathVariable Long id, @RequestBody AddRoleRequest addRoleRequest) {
+        return new ResponseEntity(userService.addRole(id, addRoleRequest), HttpStatus.CREATED);
     }
     
     @PutMapping("/{id}")

@@ -7,6 +7,7 @@ package mii.co.id.warehouseserverside.controller;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Pengajuan;
+import mii.co.id.warehouseserverside.model.dto.request.PengajuanRequest;
 import mii.co.id.warehouseserverside.service.PengajuanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,11 @@ public class PengjauanController {
     public ResponseEntity<Pengajuan> create(@RequestBody Pengajuan pengajuan){
         return new ResponseEntity(pengajuanService.create(pengajuan),HttpStatus.CREATED);
     }
+    
+//     @PostMapping
+//    public ResponseEntity<Pengajuan> create(@RequestBody PengajuanRequest pengajuanRequest){
+//        return new ResponseEntity(pengajuanService.create(pengajuanRequest),HttpStatus.CREATED);
+//    }
     
     @PutMapping("/{id}")
     public ResponseEntity<Pengajuan> update(@PathVariable Long id,@RequestBody Pengajuan pengajuan){

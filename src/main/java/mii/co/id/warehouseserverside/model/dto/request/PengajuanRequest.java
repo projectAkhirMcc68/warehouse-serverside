@@ -16,14 +16,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeRequest {
+public class PengajuanRequest {
     
-    private String fullName;
-    private String email;
-    private Date dateOfBirth;
-    private String jenisKelamin;
-    private String username;
-    private String password;
-    private Long roleId;
+    private Date tanggal;
+    private Long userId;
+    private Long statusId;
+    
     
 }

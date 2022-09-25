@@ -4,26 +4,22 @@
  */
 package mii.co.id.warehouseserverside.model.dto.request;
 
-import java.sql.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author USER
  */
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeRequest {
+public class AddRoleRequest {
     
-    private String fullName;
-    private String email;
-    private Date dateOfBirth;
-    private String jenisKelamin;
-    private String username;
-    private String password;
-    private Long roleId;
+    private List<String> roleName;
     
 }

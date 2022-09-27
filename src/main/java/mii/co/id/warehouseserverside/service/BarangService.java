@@ -30,6 +30,28 @@ public class BarangService {
         return barangRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Barang Not Found"));
     }
     
+//    public Barang findBarangId(Long id){
+//        return barangRepository.findByBarangId(id);
+//    }
+    
+//    public Barang saveBarang (Barang barang){
+//        Barang newBarang = new Barang();
+//        newBarang.setNama(barang.getNama());
+//        newBarang.getQuantitys().addAll((barang.getQuantitys()
+//                .stream()
+//                .map(quantity->{
+//                    Pengajuan pengajuan = pengajuanService.getById(quantity.getPengajuan().getId());
+//                    PengajuanBarang newPengajuanBarang = new PengajuanBarang();
+//                    newPengajuanBarang.setPengajuan(pengajuan);
+//                    newPengajuanBarang.setBarang(newBarang);
+//                    newPengajuanBarang.setQuantity(quantity.getQuantity());
+//                    return newPengajuanBarang;
+//                })
+//                .collect(Collectors.toList())
+//                ));
+//        return barangRepository.save(newBarang);
+//    }
+    
     public Barang create(Barang barang){
         if (barang.getId() != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Data sudah ada");

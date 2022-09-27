@@ -50,19 +50,10 @@ public class EmployeeService {
        
         List<Role> role = new ArrayList<>();
         role.add(roleRepository.findById(employeeRequest.getRoleId()).get());
-        user.setRoles(role);
-//       Employee employee = new Employee();
-//       employee.setFullName(employee.getFullName());
-//       employee.setEmail(employee.getEmail());
-//       employee.setDateOfBirth(employee.getDateOfBirth());
-//       employee.setJenisKelamin(employee.getJenisKelamin());
-//       
-//       User user = new User();
-//       user.setUsername(user.getUsername());
-//       user.setPassword(user.getPassword());
-//       
-       user.setEmployee(employee);
-       employee.setUser(user);
+        
+        user.setRoles(role);   
+        user.setEmployee(employee);
+        employee.setUser(user);
        
        return employeeRepository.save(employee);
    }

@@ -51,9 +51,9 @@ public class HistoryController {
         return new ResponseEntity(historyService.getById(id),HttpStatus.OK);
     }
     
-    @GetMapping("/pengajuan/")
-    public ResponseEntity<List<History>> getByIdPengajuan(@RequestParam Long id){
-        return new ResponseEntity(historyService.getByIdPengajuan(id),HttpStatus.OK);
+    @GetMapping("/pengajuan/{pId}")
+    public ResponseEntity<List<History>> getByIdPengajuan(@PathVariable Long pId){
+        return new ResponseEntity(historyService.getByIdPengajuan(pId),HttpStatus.OK);
     }
     
 }

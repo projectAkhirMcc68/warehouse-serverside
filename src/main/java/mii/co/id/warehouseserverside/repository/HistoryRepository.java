@@ -20,6 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Repository
 public interface HistoryRepository  extends JpaRepository<History, Long>{
     
-    @Query(value = "SELECT * FROM tb_history WHERE pengajuan_id= id_pengajuan" , nativeQuery = true)
-    public List<History> findIdPengajuan(@PathParam("id_pengajuan") Long id);
+    @Query(value = "SELECT * FROM tb_history WHERE pengajuan_id= :pId " , nativeQuery = true)
+    public List<History> findIdPengajuan(Long pId);
 }

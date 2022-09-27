@@ -38,7 +38,7 @@ public class HistoryService {
         return historyRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Tidak Ada"));
     }
     
-    public List<History> getByIdPengajuan(Long id){
-        return historyRepository.findIdPengajuan(id);
+    public List<History> getByIdPengajuan(Long pId){
+        return historyRepository.findIdPengajuan(pId);
     }
 }

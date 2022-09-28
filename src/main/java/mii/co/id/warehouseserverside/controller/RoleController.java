@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mii.co.id.warehouseserverside.controller;
 
 import java.util.List;
@@ -22,7 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
+<<<<<<< HEAD
  * @author aditya jalu
+=======
+ * @author USER
+>>>>>>> 85ce60a9325591b8601c379feb8ea32c2ed542d9
  */
 @AllArgsConstructor
 @RestController
@@ -54,6 +54,6 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Role> delete(@PathVariable Long id) {
         return new ResponseEntity(roleService.delete(id), HttpStatus.OK);
+
     }
-    
 }

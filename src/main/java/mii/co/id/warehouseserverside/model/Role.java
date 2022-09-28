@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mii.co.id.warehouseserverside.model;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,11 +20,12 @@ import lombok.NoArgsConstructor;
 
 /**
  *
+
  * @author aditya jalu
  */
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @Table(name = "tb_role")
 public class Role {
@@ -38,11 +37,16 @@ public class Role {
     @Column
     private String name;
     
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name= "tb_role_privilege",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id")
     )
-    private List<Privilege> privileges;
+    private List<Privilege> privileges;    
+    
 }

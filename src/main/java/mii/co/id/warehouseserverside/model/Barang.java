@@ -1,11 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mii.co.id.warehouseserverside.model;
 
-import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,18 +38,20 @@ public class Barang {
     @Column(nullable = false, length = 25)
     private String nama_barang;
     
-    @Column(nullable = false, length = 50)
+    @Column
     private String kategory;
     
-    @Column(nullable = false)
-    private Integer stock;
+    @Column
+    private Long stock;
     
-    @Column(nullable = false)
-    private Integer harga;
+    @Column
+    private Long harga;
     
-//    @Column(nullable = false)
+    @Column
     private Date tanggal;
+        
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "barang")
+    private Collection<PengajuanBarang> quantitys = new ArrayList<>();
     
-//    @OneToMany(mappedBy = "barang")   
-//    private Pengajuan pengajuan;
 }

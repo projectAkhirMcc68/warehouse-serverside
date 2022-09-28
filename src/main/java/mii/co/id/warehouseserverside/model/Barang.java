@@ -35,7 +35,7 @@ public class Barang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, length = 25)
+    @Column
     private String nama_barang;
     
     @Column

@@ -41,4 +41,10 @@ public class HistoryService {
     public List<History> getByIdPengajuan(Long pId){
         return historyRepository.findIdPengajuan(pId);
     }
+    
+    public History delete(Long id){
+        History history = getById(id);
+        historyRepository.delete(history);
+        return history;
+    }
 }

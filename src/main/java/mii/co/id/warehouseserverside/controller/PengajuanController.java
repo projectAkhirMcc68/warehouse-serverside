@@ -62,9 +62,14 @@ public class PengajuanController {
         return new ResponseEntity(pengajuanService.createDto(pengajuanRequest),HttpStatus.CREATED);
     }
     
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Pengajuan> update(@PathVariable Long id,@RequestBody Pengajuan pengajuan){
+//        return new ResponseEntity(pengajuanService.update(id, pengajuan),HttpStatus.CREATED);
+//    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity<Pengajuan> update(@PathVariable Long id,@RequestBody Pengajuan pengajuan){
-        return new ResponseEntity(pengajuanService.update(id, pengajuan),HttpStatus.CREATED);
+    public ResponseEntity<Pengajuan> update(@PathVariable Long id,@RequestBody PengajuanRequest pengajuanRequest){
+        return new ResponseEntity(pengajuanService.update(id, pengajuanRequest),HttpStatus.CREATED);
     }
     
     @DeleteMapping("/{id}")

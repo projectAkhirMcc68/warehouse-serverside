@@ -14,10 +14,10 @@ import mii.co.id.warehouseserverside.service.HistoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -51,9 +51,14 @@ public class HistoryController {
         return new ResponseEntity(historyService.getById(id),HttpStatus.OK);
     }
     
-    @GetMapping("/pengajuan/{pId}")
-    public ResponseEntity<List<History>> getByIdPengajuan(@PathVariable Long pId){
-        return new ResponseEntity(historyService.getByIdPengajuan(pId),HttpStatus.OK);
+    @GetMapping("/idPengajuan/{id}")
+    public ResponseEntity<List<History>> getByIdPengajuan(@PathVariable Long id){
+        return new ResponseEntity(historyService.getByIdPengajuan(id),HttpStatus.OK);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<History> delete(@PathVariable Long id){
+        return new ResponseEntity(historyService.delete(id),HttpStatus.OK);
     }
     
 }

@@ -5,6 +5,7 @@
 package mii.co.id.warehouseserverside.model.dto.request;
 
 import java.sql.Date;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PengajuanRequest {
     
+    @Id
+    private Long id;
     private Date tanggal;
     private Long userId;
     private Long statusId;
-    private Long barangId;
-    private Long quantity;
+//    private Long barangId;
+//    private Long quantitys;
     
     
 }

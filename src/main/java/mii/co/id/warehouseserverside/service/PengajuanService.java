@@ -27,7 +27,8 @@ public class PengajuanService {
     
     private final PengajuanRepository pengajuanRepository;
     private final BarangService barangService;
-   //private final PengajuanBarang pengajuanBarang;
+   private UserService userService;
+   private StatusService statusService;
    private final ModelMapper modelMapper;
     
    public  List<Pengajuan> getAll(){
@@ -67,14 +68,17 @@ public Pengajuan savePengajuan (Pengajuan pengajuan){
 
     public Pengajuan createDto(PengajuanRequest pengajuanRequest){
         Pengajuan pengajuan = modelMapper.map(pengajuanRequest, Pengajuan.class);
-        //Barang barang = modelMapper.map(pengajuanRequest, Barang.class);
+        pengajuan.setUser(userService.getById(pengajuanRequest.getUserId()));
+        pengajuan.setStatus(statusService.getById(pengajuanRequest.getStatusId()));
         pengajuan.getQuantitys().addAll((pengajuan.getQuantitys()
                 .stream()
                 .map(quantity->{
                     Barang  barang= barangService.getById(quantity.getBarang().getId());
-                     PengajuanBarang pengajuanBarang = modelMapper.map(pengajuanRequest, PengajuanBarang.class);
-                     pengajuanBarang.setBarang(barang);
-                    return pengajuanBarang;
+                    PengajuanBarang newPengajuanBarang = new PengajuanBarang();
+                    newPengajuanBarang.setBarang(barang);
+                    newPengajuanBarang.setPengajuan(pengajuan);
+                    newPengajuanBarang.setQuantity(quantity.getQuantity());
+                    return newPengajuanBarang;
                 })
                 .collect(Collectors.toList())
                 ));
@@ -82,11 +86,22 @@ public Pengajuan savePengajuan (Pengajuan pengajuan){
     }
 
 
-   public Pengajuan update(Long id, Pengajuan pengajuan){
+//   public Pengajuan update(Long id, Pengajuan pengajuan){
+//       getById(id);
+//       pengajuan.setId(id);
+//       return pengajuanRepository.save(pengajuan);
+//   }
+   
+   public Pengajuan update(Long id, PengajuanRequest pengajuanRequest){
        getById(id);
-       pengajuan.setId(id);
+       pengajuanRequest.setId(id);
+       Pengajuan pengajuan = modelMapper.map(pengajuanRequest, Pengajuan.class);
+//       pengajuan.setId(id);
+       pengajuan.setUser(userService.getById(pengajuanRequest.getUserId()));
+       pengajuan.setStatus(statusService.getById(pengajuanRequest.getStatusId()));
        return pengajuanRepository.save(pengajuan);
    }
+   
    
    public Pengajuan delete(Long id){
        Pengajuan pengajuan = getById(id);

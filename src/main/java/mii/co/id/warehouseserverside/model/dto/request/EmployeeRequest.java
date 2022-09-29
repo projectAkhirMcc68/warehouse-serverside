@@ -21,7 +21,7 @@ public class EmployeeRequest {
     private String fullName;
     private String email;
     private Date dateOfBirth;
-    private String jenisKelamin;
+//    private String jenisKelamin;
     private String username;
     private String password;
     private Long roleId;

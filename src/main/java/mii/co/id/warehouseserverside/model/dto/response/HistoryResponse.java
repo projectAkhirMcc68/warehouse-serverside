@@ -21,7 +21,6 @@ public class HistoryResponse {
     
     private Long id;
     private Long pengajuanId;
-    private Long statusId;
     private String nameStatus;
     private Date date;
     private String notes;

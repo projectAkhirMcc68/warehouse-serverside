@@ -4,6 +4,7 @@
  */
 package mii.co.id.warehouseserverside.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -39,9 +40,9 @@ public class Pengajuan {
     private Long Id;
     
     @Column
+//    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date tanggal;
     
-     
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;

@@ -33,10 +33,12 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "pengajuan_id",referencedColumnName = "id")
     private Pengajuan pengajuan;
 
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;

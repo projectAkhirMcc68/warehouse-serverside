@@ -10,8 +10,10 @@ import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Role;
 import mii.co.id.warehouseserverside.model.User;
 import mii.co.id.warehouseserverside.model.dto.request.AddRoleRequest;
+import mii.co.id.warehouseserverside.model.dto.request.UserRequest;
 import mii.co.id.warehouseserverside.repository.RoleRepository;
 import mii.co.id.warehouseserverside.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,6 +28,8 @@ public class UserService {
     
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    
+    private ModelMapper modelMapper;
     
    public  List<User> getAll(){
        return userRepository.findAll();
@@ -56,9 +60,21 @@ public class UserService {
        return userRepository.save(user);
    }
    
-   public User update(Long id, User user){
+//   public User update(Long id, User user){
+//       getById(id);
+//       user.setId(id);
+//       return userRepository.save(user);
+//   }
+   
+    public User update(Long id, UserRequest userRequest){
        getById(id);
-       user.setId(id);
+       userRequest.setId(id);
+       User user = modelMapper.map(userRequest, User.class);
+       
+       List<Role> role = new ArrayList<>();
+       role.add(roleRepository.findById(userRequest.getRoleId()).get());
+       user.setRoles(role);
+       
        return userRepository.save(user);
    }
    

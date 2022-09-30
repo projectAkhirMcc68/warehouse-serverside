@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.User;
 import mii.co.id.warehouseserverside.model.dto.request.AddRoleRequest;
+import mii.co.id.warehouseserverside.model.dto.request.UserRequest;
 import mii.co.id.warehouseserverside.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +53,8 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id,@RequestBody User user){
-        return new ResponseEntity(userService.update(id, user),HttpStatus.CREATED);
+    public ResponseEntity<User> update(@PathVariable Long id,@RequestBody UserRequest userRequest){
+        return new ResponseEntity(userService.update(id, userRequest),HttpStatus.CREATED);
     }
     
     @DeleteMapping("/{id}")

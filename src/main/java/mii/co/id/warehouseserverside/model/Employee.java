@@ -42,8 +42,6 @@ public class Employee {
     @Column
     private Date dateOfBirth;
     
-//    @Column(name = "jenis_kelamin")
-//    private String jenisKelamin;
     
     @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

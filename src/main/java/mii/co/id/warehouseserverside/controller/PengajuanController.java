@@ -7,9 +7,9 @@ package mii.co.id.warehouseserverside.controller;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Pengajuan;
-import mii.co.id.warehouseserverside.model.PengajuanBarang;
 import mii.co.id.warehouseserverside.model.dto.request.PengajuanRequest;
 import mii.co.id.warehouseserverside.service.PengajuanService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,11 +31,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class PengajuanController {
     
     private final PengajuanService pengajuanService;
+    private ModelMapper modelMapper;
     
+//    @GetMapping
+//    public ResponseEntity <List<Pengajuan>> getAll(){
+//        return new ResponseEntity(pengajuanService.getAll().stream().map(response-> modelMapper.map(response, PengajuanResponse.class))
+//                .collect(Collectors.toList()),HttpStatus.OK);
+//    }
     @GetMapping
-    public ResponseEntity <List<Pengajuan>> getAll(){
+    public ResponseEntity<List<Pengajuan>> getAll(){
         return new ResponseEntity(pengajuanService.getAll(),HttpStatus.OK);
-    }
+    } 
     
     @GetMapping("/{id}")
     public ResponseEntity<Pengajuan> getById(@PathVariable Long id){
@@ -52,10 +58,10 @@ public class PengajuanController {
 //        return new ResponseEntity(pengajuanService.create(pengajuanRequest),HttpStatus.CREATED);
 //    }
     
-  @PostMapping("/save")
-    public ResponseEntity<Pengajuan> createPengajuan(@RequestBody Pengajuan pengajuan){
-        return new ResponseEntity(pengajuanService.savePengajuan(pengajuan),HttpStatus.CREATED);
-    }
+//  @PostMapping("/save")
+//    public ResponseEntity<Pengajuan> createPengajuan(@RequestBody Pengajuan pengajuan){
+//        return new ResponseEntity(pengajuanService.savePengajuan(pengajuan),HttpStatus.CREATED);
+//    }
     
      @PostMapping("/dto")
     public ResponseEntity<Pengajuan> createDto(@RequestBody PengajuanRequest pengajuanRequest){

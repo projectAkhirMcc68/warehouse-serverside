@@ -1,22 +1,21 @@
-    /*
+        /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mii.co.id.warehouseserverside.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -51,11 +50,27 @@ public class Pengajuan {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @Column
+    private Long Quantity;
+    
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "pengajuan")
     private List<History> history;
     
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "pengajuan",cascade = CascadeType.ALL)
-    private Collection<PengajuanBarang> quantitys = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+                        name = "tb_pengajuan_barang",
+                        joinColumns = @JoinColumn(name = "pengajuan_id"),
+                        inverseJoinColumns = @JoinColumn(name = "barang_id")
+    )
+    private List<Barang> barang;
+    
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @OneToMany(mappedBy = "pengajuan",cascade = CascadeType.ALL)
+//    private Collection<PengajuanBarang> quantitys = new ArrayList<>();
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @OneToMany(mappedBy = "pengajuan")
+//    private List<PengajuanBarang> pengajuanBarang;
+    
+    
 }

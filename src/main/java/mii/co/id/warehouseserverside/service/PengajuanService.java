@@ -4,13 +4,13 @@
  */
 package mii.co.id.warehouseserverside.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import mii.co.id.warehouseserverside.model.Barang;
 import mii.co.id.warehouseserverside.model.Pengajuan;
-import mii.co.id.warehouseserverside.model.PengajuanBarang;
 import mii.co.id.warehouseserverside.model.dto.request.PengajuanRequest;
+import mii.co.id.warehouseserverside.repository.BarangRepository;
 import mii.co.id.warehouseserverside.repository.PengajuanRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -26,9 +26,10 @@ import org.springframework.web.server.ResponseStatusException;
 public class PengajuanService {
     
     private final PengajuanRepository pengajuanRepository;
-    private final BarangService barangService;
+        private final BarangService barangService;
    private UserService userService;
    private StatusService statusService;
+   private BarangRepository barangRepository;
    private final ModelMapper modelMapper;
     
    public  List<Pengajuan> getAll(){
@@ -46,44 +47,38 @@ public class PengajuanService {
        return pengajuanRepository.save(pengajuan);
    }
    
-public Pengajuan savePengajuan (Pengajuan pengajuan){
-        Pengajuan newPengajuan = new Pengajuan();
-        newPengajuan.setTanggal(pengajuan.getTanggal());
-        newPengajuan.setStatus(pengajuan.getStatus());
-        newPengajuan.setUser(pengajuan.getUser());
-        newPengajuan.getQuantitys().addAll((pengajuan.getQuantitys()
-                .stream()
-                .map(quantity->{
-                    Barang  barang= barangService.getById(quantity.getBarang().getId());
-                    PengajuanBarang newPengajuanBarang = new PengajuanBarang();
-                    newPengajuanBarang.setBarang(barang);
-                    newPengajuanBarang.setPengajuan(newPengajuan);
-                    newPengajuanBarang.setQuantity(quantity.getQuantity());
-                    return newPengajuanBarang;
-                })
-                .collect(Collectors.toList())
-                ));
-        return pengajuanRepository.save(newPengajuan);
-    }
+//public Pengajuan savePengajuan (Pengajuan pengajuan){
+//        Pengajuan newPengajuan = new Pengajuan();
+//        newPengajuan.setTanggal(pengajuan.getTanggal());
+//        newPengajuan.setStatus(pengajuan.getStatus());
+//        newPengajuan.setUser(pengajuan.getUser());
+//        newPengajuan.getQuantitys().addAll((pengajuan.getQuantitys()
+//                .stream()
+//                .map(quantity->{
+//                    Barang  barang= barangService.getById(quantity.getBarang().getId());
+//                    PengajuanBarang newPengajuanBarang = new PengajuanBarang();
+//                    newPengajuanBarang.setBarang(barang);
+//                    newPengajuanBarang.setPengajuan(newPengajuan);
+//                    newPengajuanBarang.setQuantity(quantity.getQuantity());
+//                    return newPengajuanBarang;
+//                })
+//                .collect(Collectors.toList())
+//                ));
+//        return pengajuanRepository.save(newPengajuan);
+//    }
 
     public Pengajuan createDto(PengajuanRequest pengajuanRequest){
         Pengajuan pengajuan = modelMapper.map(pengajuanRequest, Pengajuan.class);
         pengajuan.setUser(userService.getById(pengajuanRequest.getUserId()));
         pengajuan.setStatus(statusService.getById(pengajuanRequest.getStatusId()));
-        pengajuan.getQuantitys().addAll((pengajuan.getQuantitys()
-                .stream()
-                .map(quantity->{
-                    Barang  barang= barangService.getById(quantity.getBarang().getId());
-                    PengajuanBarang newPengajuanBarang = new PengajuanBarang();
-                    newPengajuanBarang.setBarang(barang);
-                    newPengajuanBarang.setPengajuan(pengajuan);
-                    newPengajuanBarang.setQuantity(quantity.getQuantity());
-                    return newPengajuanBarang;
-                })
-                .collect(Collectors.toList())
-                ));
+        
+        List<Barang> barang = new ArrayList<>();
+        barang.add(barangRepository.findById(pengajuanRequest.getBarangId()).get());
+        pengajuan.setBarang(barang);
+        
         return pengajuanRepository.save(pengajuan);
     }
+   
 
 
 //   public Pengajuan update(Long id, Pengajuan pengajuan){
@@ -91,14 +86,20 @@ public Pengajuan savePengajuan (Pengajuan pengajuan){
 //       pengajuan.setId(id);
 //       return pengajuanRepository.save(pengajuan);
 //   }
+
+
    
    public Pengajuan update(Long id, PengajuanRequest pengajuanRequest){
        getById(id);
        pengajuanRequest.setId(id);
        Pengajuan pengajuan = modelMapper.map(pengajuanRequest, Pengajuan.class);
-//       pengajuan.setId(id);
        pengajuan.setUser(userService.getById(pengajuanRequest.getUserId()));
        pengajuan.setStatus(statusService.getById(pengajuanRequest.getStatusId()));
+       
+       List<Barang> barang = new ArrayList<>();
+        barang.add(barangRepository.findById(pengajuanRequest.getBarangId()).get());
+        pengajuan.setBarang(barang);
+       
        return pengajuanRepository.save(pengajuan);
    }
    

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mii.co.id.warehouseserverside.model.dto.request;
+package mii.co.id.warehouseserverside.model.dto.response;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PengajuanRequest {
+public class PengajuanResponse {
     
     private Long id;
     private Date tanggal;
@@ -24,6 +24,4 @@ public class PengajuanRequest {
     private Long statusId;
     private Long barangId;
     private Long quantity;
-    
-    
 }

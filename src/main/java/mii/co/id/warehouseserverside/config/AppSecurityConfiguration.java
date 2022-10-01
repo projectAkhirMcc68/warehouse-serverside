@@ -40,14 +40,6 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .userDetailsService(appUserDetailService)
                 .passwordEncoder(passwordEncoder());
         
-//       auth.inMemoryAuthentication()
-//                .withUser("marni")
-//                .password("marni")
-//                .roles("USER")
-//                .and()
-//                .withUser("blah")
-//                .password("blah")
-//                .roles("ADMIN"); 
     }
 
     @Override
@@ -56,18 +48,11 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/employee/dto").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
         
-//       http.authorizeRequests()
-//               .antMatchers("/barang").hasRole("ADMIN")
-//               .antMatchers("/pengajuan").hasAnyRole("USER","ADMIN")
-//               .antMatchers("/**").permitAll()
-//               .and()
-//               .httpBasic();
     }
     
     @Bean
@@ -75,10 +60,6 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
-    
-    
-    
     
     @Bean
     public PasswordEncoder passwordEncoder() {

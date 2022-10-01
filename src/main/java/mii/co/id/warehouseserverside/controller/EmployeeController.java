@@ -28,18 +28,18 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/employee")
-//@PreAuthorize("hasRole('ADMIN') ")
+@PreAuthorize("hasAnyRole('ADMIN','USER') ")
 public class EmployeeController {
     
     private final EmployeeService employeeService;
     
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('READ_ADMIN','READ_USER')")
     @GetMapping
     public ResponseEntity <List<Employee>> getAll(){
         return new ResponseEntity(employeeService.getAll(),HttpStatus.OK);
     }
     
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('READ_ADMIN','READ_USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getById(@PathVariable Long id){
         return new ResponseEntity(employeeService.getById(id),HttpStatus.OK);
@@ -50,13 +50,13 @@ public class EmployeeController {
         return new ResponseEntity(employeeService.create(employee),HttpStatus.CREATED);
     }
     
-//    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
       @PostMapping("/dto")
     public ResponseEntity<Employee> createDto(@RequestBody EmployeeRequest employeeRequest){
         return new ResponseEntity(employeeService.createDto(employeeRequest),HttpStatus.CREATED);
     }
     
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UPDATE_ADMIN','UPDATE_USER')")
     @PutMapping("/{id}")
     public ResponseEntity<Employee> update(@PathVariable Long id,@RequestBody Employee employee){
         return new ResponseEntity(employeeService.update(id, employee),HttpStatus.CREATED);

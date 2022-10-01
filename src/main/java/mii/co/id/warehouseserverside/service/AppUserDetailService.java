@@ -4,15 +4,11 @@
  */
 package mii.co.id.warehouseserverside.service;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mii.co.id.warehouseserverside.model.AppUserDetail;
 import mii.co.id.warehouseserverside.model.User;
 import mii.co.id.warehouseserverside.repository.UserRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -39,6 +39,10 @@ public class UserService {
        return userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Data User Not Found"));
    }
    
+   public User getByUsername(String name){
+       return userRepository.findByUsername(name).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User Not Found"));
+   }
+   
    public User create(User user){
 //       if (user.getId() != null) {
 //           throw new ResponseStatusException(HttpStatus.CONFLICT, "Data User Has Ready Exist!!");

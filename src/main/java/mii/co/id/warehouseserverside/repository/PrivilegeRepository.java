@@ -1,11 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mii.co.id.warehouseserverside.repository;
 
-import java.util.Optional;
-import mii.co.id.warehouseserverside.model.User;
+import mii.co.id.warehouseserverside.model.Privilege;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author USER
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
-   
-    Optional<User> findByUsername(String name);
+public interface PrivilegeRepository extends JpaRepository<Privilege, Long>{
     
 }

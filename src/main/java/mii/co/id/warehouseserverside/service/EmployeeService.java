@@ -15,6 +15,7 @@ import mii.co.id.warehouseserverside.repository.EmployeeRepository;
 import mii.co.id.warehouseserverside.repository.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,6 +29,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
     
    public  List<Employee> getAll(){
        return employeeRepository.findAll();
@@ -47,6 +49,7 @@ public class EmployeeService {
    public Employee createDto(EmployeeRequest employeeRequest){
        Employee employee = modelMapper.map(employeeRequest, Employee.class);
        User user = modelMapper.map(employeeRequest, User.class);
+       user.setPassword(passwordEncoder.encode(employeeRequest.getPassword()));
        
         List<Role> role = new ArrayList<>();
         role.add(roleRepository.findById(employeeRequest.getRoleId()).get());

@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Repository
 public interface HistoryRepository  extends JpaRepository<History, Long>{
     
+    //native query
     @Query(value = "SELECT * FROM tb_history WHERE pengajuan_id= :pId " , nativeQuery = true)
     public List<History> findIdPengajuan(Long pId);
 }
